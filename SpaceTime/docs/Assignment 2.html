@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<!-- saved from url=(0078)http://users.encs.concordia.ca/~sthiel/soen387/assignments/a2/Assignment2.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>Assignment 2</title>
+</head>
+
+<body>
+<h1>The Assignment</h1>
+
+<p>Your assignment, should you choose to accept it, is to fill out the existing web application given the provided simplified
+<a href="http://users.encs.concordia.ca/~sthiel/soen387/assignments/a2/UseCases.txt">Use Cases</a>, Domain Models  <a href="http://users.encs.concordia.ca/~sthiel/soen387/assignments/a2/SpaceTimePlayer.png">Player-centric</a> /
+<a href="http://users.encs.concordia.ca/~sthiel/soen387/assignments/a2/SpaceTimeNotification.png">Notification-centric</a>, <a href="http://users.encs.concordia.ca/~sthiel/soen387/assignments/a2/Requirements.txt">"Requirements"</a>, <a href="http://users.encs.concordia.ca/~sthiel/soen387/assignments/a2/NonFunctionalRequirements.txt">"NFRs"</a> 
+and <a href="http://users.encs.concordia.ca/~sthiel/soen387/assignments/a2/SampleResponses.txt">Sample Responses that correspond to each use case</a>.</p>
+
+<p>Note that SpaceTime does not have to work.</p>
+
+<h1>Architectural Patterns</h1>
+<p>You are expected to update your application with the new patterns we learn about. You only need to go as far as the 
+November 25th material, which is the use of RESTful URLs and FrontController/Dispatcher/Commands, along with the previous 
+advanced patterns.</p>
+
+<p>You need to make use of SoenEA extensively in this assignment. You are expected to make use of the DomainObject, 
+IDomainObject DomainObjectProxy facilities, as well as SoenEA's UoW (and accordingly GenericOutputMapper). You <b>must</b> make use 
+of SoenEA's User and Role system, even if you only use the Guest Role (adjust MyResources.properties accordingly). You should be 
+using SoenEA's base-classes for your FrontController, its PermaLink Filter and its DispatcherFactory/Dispatchers and abstract Command
+Supertype. You are not required to use the Command Annotation system from SoenEA, but you'd be crazy not to.</p>
+
+<h1>A Starting Point</h1>
+<p>To get you going, I have provided a generic <a href="http://users.encs.concordia.ca/~sthiel/soen387/assignments/a2/SpaceTimeSolution.zip">Solution to Assignment 1</a> in the form of 
+the org package as well as the jsp folder belonging in WEB-INF. I have also provided a <a href="http://users.encs.concordia.ca/~sthiel/soen387/assignments/a2/SpaceTimeSolutionSOENEA.zip">SOENEA version</a> that uses the DomainObject/IDomainObject/DomainObjectProxy classes from SOENEA (including the already-made User DomainObject), uses the UoW as an IdentityMap (but not as a UoW, since that's not in A1) and makes use of the UniqueIdFactory default implementation. You should know what to do with these to make them work. You
+may also start with your own Assignment 1 solution if you are happy with it, but please look at the solution to see and 
+understand differences. Please try to maintain the directory structure, as it makes life easier for everyone.</p>
+
+<p>SoenEA's PermalinkFilter uses an additional set of xml files and approaches that we'll go over in subsequent tutorials. Be
+ready to accommodate this. Part of the goals of this assignment are to make you ask why things are a certain way and to 
+pursue solutions given uncertainty... try to think of what would be sensible given the course material.</p>
+
+<p>The test suite for Assignment 1 is included in the solution. Further tests will be forthcoming.</p>
+
+<h1>UI</h1>
+<p>You are not technically required to make a front-end, as I'm not likely to manually mark things... but if things go South and 
+ I have to manually walk through your application or give you a zero, I'm going to want to have an HTML front-end to make my
+ life easier... at which point you'll want to use the mode=xml or some such to support xml interfaces like in the TDD tutorial.
+ 
+</p><h1>Testing and Feedback</h1>
+<p>Initially, testing will be thin. Look at the xml you output, maybe test a bit on your own. I'll provide a growing test suite
+based on what I think is necessary and your feedback. I make mistakes, you make mistakes, but this process should let us both
+resolve that silly stuff such that you are evaluated on your high level use/comprehension of the patterns, not on whether you 
+can avoid typos.</p>
+
+<p></p>
+
+<h1>Final Inspirational Notes</h1>
+<p>This Assignment is an <b>Individual Assignment</b> worth <b>10%</b> of your grade. The assignment is due on December 8th. Don't wait till 
+the last few days!.</p>
+
+
+
+ 
+</body></html>

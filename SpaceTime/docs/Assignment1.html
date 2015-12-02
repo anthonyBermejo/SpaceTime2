@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Assignment 1</title>
+</head>
+
+<body>
+<h1>The Assignment</h1>
+
+<p>Your assignment is to fill out the existing web application given the provided simplified
+<a href="UseCases.txt">Use Cases</a>, <a href="DomainModel.png">Domain Model</a>, <a href="NonFunctionalRequirements.txt">NFRs</a>
+and <a href="SampleResponses.txt">Sample Responses</a> that correspond to initial use cases. To guide you in this, a test suite
+has been provided that should help you determine what your XML responses need to look like.</p>
+
+<p>Note that the game does not have to work, you just need to have all the Use Cases specified working.</p>
+
+<h1>Architectural Patterns</h1>
+<p>You are expected to update your application with the new patterns we learn about. You only need to go as far as the October 21st
+material, which is Lazy Load and Identity Map. Initial User and Player structures will be a bit ahead of what you have seen, and why they work
+as they work may not yet be clear... but it should become clear.</p>
+
+<p>You may make use of as much of SoenEA as you'd like, to this end. There is some
+documentation for it, but it is crap and mostly in javadoc comments where it helps almost nobody... besides, for assignment one
+it is a good idea to do some of this on your own... but you have that option, and some groups of students in the past have
+profitably done this.</p>
+
+<h1>A Starting Point</h1>
+<p>To get you going, I have provided an <a href="SpaceTime.zip">initial web application</a> in the form of a jar that you can 
+import into eclipse to create a starting project. I've created the empty Page Controllers (read Transaction Script for 
+now) and a skeleton Player/User POJO. You need to create the 
+rest, but can take guidance from the provided classes, tutorials and lectures. Following that directory structure will likely 
+save you trouble in the future.</p>
+
+<p>You'll also note that the initial project uses SoenEA a little bit. For your second assignment I'll want you to use SoenEA's
+features more fully so I have less of a headache marking. For now, we'll stick to convenience things like DbRegistry that 
+acts as a ThreadLocal and the SoenEA Servlet class which gives default behaviour to pipe post/get into processRequest and cleans
+up said Database Connection so long as you're just using the default one. This means you HAVE TO put your DB credentials in
+MyResources.properties. Take a look at how DBRegistry is used in the TDGs, and note that in AbstractPageController, the IMs from 
+Player/User are cleaned up, as is the database connection. Also make sure that Setup and Teardown on org.soen387.test get updated to reflect
+table creation and dropping, as this'll make the tests run nice.</p>
+
+<h1>UI</h1>
+<p>You are not technically required to make a front-end, as I'm not likely to manually mark things... but if things go South and 
+ I have to manually walk through your application or give you a zero, I'm going to want to have an HTML front-end to make my
+ life easier... at which point you'll want to use the mode=xml or some such to support xml interfaces like in the TDD tutorial.
+ 
+<h1>Testing and Feedback</h1>
+<p>Initially, testing will be thin. Look at the xml you output, maybe test a bit on your own. I'll provide a growing test suite
+based on what I think is necessary and your feedback. You can update FieldMap.java to reflect how you interact 
+with your application. I will copy what you have here into the test suite I use to mark, so you need to follow this interface so that
+my test suite talks to your webapp properly or you'll likely get zero.</p> 
+
+<p>I make mistakes, you make mistakes, but this process should let us both
+resolve that silly stuff such that you are evaluated on your high level use/comprehension of the patterns, not on whether you 
+can avoid typos.</p>
+
+<h1>Final Inspirational Notes</h1>
+<p>This Assignment is an individual assignment worth 10% of your grade. The assignment is due on November 6th, via the EAS system. 
+Submit a zip/jar/war that includes all source files and structure. If I can't run it in a dynamic eclipse project with minimal effort, 
+we have a problem.</p>
+
+</body>
+
+</html> 

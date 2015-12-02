@@ -1,0 +1,100 @@
+Use Cases Redux
+
+1. Log In
+ pre: user not logged in
+ post: user logged in
+2. Log Out
+ pre: user logged in
+ post: user not logged in
+
+3. Register User
+ pre: user not logged in
+ post: user logged in
+ 
+4. List Players
+
+5. Recruit Pilot
+ pre: user logged in
+ post: pilot with unique name added to Pilot List for that player
+ 
+6. Fire Pilot
+ pre: user logged in
+ pre: pilot belongs to player
+ post: pilot removed from game and any teams they were on
+ 
+7. List Pilots
+ pre: user logged in
+
+8. Add Team
+ pre: user logged in
+ team with given name does not exist
+ post: team with given name now exists and is empty
+
+9. Remove Team
+ pre: user logged in
+ team with given name exists and belongs to user
+ post: team with given name no longer exists
+ 
+10. View Team
+ pre: user logged in
+ 
+11. Add Pilot To Team
+ pre: user logged in
+ pilot is not already on the team
+ team and pilot belong to current user
+ post: pilot is on the team
+
+12. Remove Pilot From Team
+ pre: user logged in
+ pilot is on the team
+ team and pilot belong to current user
+ post: pilot is not on the team
+
+13. Challenge Player
+ pre: user logged in
+	  player has no open challenge with target player
+	  player has no open match with target player
+
+14. Respond to User Challenge
+ pre: user logged in
+	  player is challengee for this challenge
+ post: 
+ 14.1 Accepted
+	  Issuing Player is notified of acceptance
+ 14.2 Refused
+	  Issuing Player is notified of refusal
+     
+15. View Challenges
+ pre: user logged in
+ 
+16. Withdraw Challenge
+ pre: user logged in
+      player is issuer of challenge
+      challenge is open
+      
+17. View Unseen Notifications
+ pre: user logged in
+ 
+18. View All Notifications
+ pre: user logged in
+
+19. See Notification
+ pre: user logged in
+      notification is unseen
+ post: notification is seen
+ 
+20. Delete Notification
+ pre: user logged in
+ 
+21. Delete Account
+ pre: user logged in
+ post: user is logged out
+       all open challenges issued by player are withdrawn
+       all open challenges issued to player are refused
+       all open games involving this player are conceded
+ 
+22. List Matches
+
+23. List Matches For Player
+
+ 

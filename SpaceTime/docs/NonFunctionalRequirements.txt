@@ -1,0 +1,5 @@
+Non-Functional Requirements
+1. usernames must be unique
+2. emails must be unique
+3. team names must be unique for a given player
+4. name generation for recruited pilots is up to you.

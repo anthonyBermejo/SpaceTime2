@@ -1,0 +1,80 @@
+1. Log In
+<game>
+<status>success</status>
+<player firstName="Stuart" lastName="Thiel" email="sthiel@encs.concordia.ca" id="1" version="1">
+ <user username="sthiel" id="1"/>
+</player>
+</game>
+
+2. Log Out
+<game>
+<status>success</status>
+</game>
+
+3. Register User
+<game>
+<status>success</status>
+<player firstName="Stuart" lastName="Thiel" email="sthiel@encs.concordia.ca" id="1" version="1">
+ <user username="sthiel" id="1" version="1">
+</player>
+</game>
+
+4. List Players
+<game>
+<status>success</status>
+<players page="1" count="3">
+<player firstName="Stuart" lastName="Thiel" email="sthiel@encs.concordia.ca" id="1" version="1" />
+ <user username="sthiel" id="1" version="1">
+</player>
+<player firstName="Chuck" lastName="Norries" email="tearscurecancer@gmail.com" id="2" version="1" />
+ <user username="chuck" id="2" version="1">
+</player>
+<player firstName="James" lastName="Bond" email="DoubleOhSeven@yahoo.co.uk" id="3" version="1" />
+ <user username="jamesjamesbond" id="3" version="1">
+</player>
+</players>
+</game>
+
+13. Challenge User
+<game>
+<status>success</status>
+<challenge status="0" id="3" version="1">
+<challenger refid="1" />
+<challengee refid="3" />
+</challenge>
+</game>
+
+14. Respond to User Challenge
+<game>
+<status>success</status>
+<challenge status="2" id="3" version="2">
+<challenger refid="1" />
+<challengee refid="3" />
+</challenge>
+</game>
+
+15. View Challenges
+<game>
+<status>success</status>
+<challenges page="1" count="3">
+<challenge id="1" version="2" status="1">
+<challenger refid="1" />
+<challengee refid="2" />
+</challenge>
+<challenge id="2" version="2" status="1">
+<challenger refid="1" />
+<challengee refid="2" />
+</challenge>
+<challenge id="3" version="1" status="0">
+<challenger refid="1" />
+<challengee refid="3" />
+</challenge>
+</challenges>
+</game>
+
+16. Withdraw Challenge
+<game>
+<status>success</status>
+</game>
+
+oh snap... you need to determine all the rest from the test suite! Still, the above is decent guidance

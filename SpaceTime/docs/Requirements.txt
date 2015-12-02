@@ -1,0 +1,37 @@
+Requirements
+1. All usernames must be unique [Diagram:SpaceTimePlayer]
+2. All emails must be unique [Diagram:SpaceTimePlayer]
+3.1 A User cannot challenge themselves [Diagram:SpaceTimePlayer]
+3.2 A User cannot challenge another player with whom you have an 
+   open challenge or active game [Diagram:SpaceTimePlayer]
+4. Players get notified of challenges issued against 
+   them and when challenges are accepted or refused, 
+   but not when challenges are withdrawn [Diagram:SpaceTimePlayer]
+4.1 Withdrawing a challenge should delete unseen ChallengeIssued 
+   notifications
+4.2 Responding to a challenge that has been withdrawn should appropriately
+   indicate that the corresponding challenge no-longer appears to exist 
+5. Deleting a player loses all identifiable information, but maintains the 
+   associations. e.g. username/password/firstName/lastName/email get removed, 
+   but the player stays 
+5.1 On deletion, passwords should be set to "-" or some unhashable value for 
+   the password system
+5.2 On deletion fields should be replaced with del_[ID] where [ID] is the id
+   of that Domain Object
+5.2.1 email should be set to del_[ID]@[DOMAIN] where [ID] is the id of
+   that Domain Object, and [DOMAIN] is the domain name of the checkers site
+   (yes, this is fictitious)
+5.3 On deletion, a user should be logged out
+6. All results yielding multiple items should be paged
+6.1 The default items per page for the application should be 10
+6.2 The Client should be able to specify a page length in the request
+6.3 The Client should specify a target page when making a request to a list 
+   result
+6.3.1 Requesting pages should be 1-based (as opposed to zero-based)
+6.3.2 The default page, if not specified is page 1
+6.3.3 Requesting a page beyond current data should result in the last 
+   available page being provided
+6.4 Empty pages are valid only if the first page is empty
+6.5.1 Games, Challenges and Notifications should order on id as a simple 
+   form of chronological ordering (albeit an unreliable form)
+6.5.2 Players should order on lastName, then firstName
