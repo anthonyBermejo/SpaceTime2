@@ -4,6 +4,9 @@ import java.sql.SQLException;
 
 import org.dsrg.soenea.service.tdg.UserTDG;
 import org.soen387.app.AbstractPageController;
+import org.soen387.domain.model.challenge.tdg.ChallengeTDG;
+import org.soen387.domain.model.notification.mapper.NotificationInputMapper;
+import org.soen387.domain.model.notification.tdg.NotificationTDG;
 import org.soen387.domain.model.pilot.tdg.PilotTDG;
 import org.soen387.domain.model.player.tdg.PlayerTDG;
 import org.soen387.domain.model.team.tdg.TeamMembershipTDG;
@@ -49,6 +52,20 @@ public class Teardown {
 		
 		try {
 			TeamMembershipTDG.dropTable();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		try {
+			ChallengeTDG.dropTable();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		try {
+			NotificationTDG.dropTable();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
