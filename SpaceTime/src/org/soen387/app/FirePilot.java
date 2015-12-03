@@ -10,7 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.dsrg.soenea.service.threadLocal.DbRegistry;
 import org.soen387.domain.model.pilot.Pilot;
-import org.soen387.domain.model.pilot.mapper.PilotMapper;
+import org.soen387.domain.model.pilot.mapper.PilotInputMapper;
+import org.soen387.domain.model.pilot.mapper.PilotOutputMapper;
 import org.soen387.domain.model.player.Player;
 
 /**
@@ -38,8 +39,8 @@ public class FirePilot extends AbstractPageController implements Servlet {
 			//Do Stuff
 			Player p = getCurrentPlayer(request);
 			if (p != null) {
-				Pilot pilot = PilotMapper.find(Long.parseLong(request.getParameter("pilot")));
-				PilotMapper.deleteStatic(pilot);
+				Pilot pilot = PilotInputMapper.find(Long.parseLong(request.getParameter("pilot")));
+				PilotOutputMapper.deleteStatic(pilot);
 			} else {
 				throw new Exception("Must be logged in to list pilots!");
 			}

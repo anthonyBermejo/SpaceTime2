@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.dsrg.soenea.service.threadLocal.DbRegistry;
 import org.soen387.domain.model.pilot.Pilot;
-import org.soen387.domain.model.pilot.mapper.PilotMapper;
+import org.soen387.domain.model.pilot.mapper.PilotOutputMapper;
 import org.soen387.domain.model.pilot.tdg.PilotTDG;
 import org.soen387.domain.model.player.Player;
 import org.soen387.ser.name.NameFactory;
@@ -41,7 +41,7 @@ public class RecruitPilot extends AbstractPageController implements Servlet {
 			Player p = getCurrentPlayer(request);
 			if(p != null) {
 				Pilot pilot = new Pilot(PilotTDG.getMaxId(), 1, NameFactory.getName(), p);
-				PilotMapper.insertStatic(pilot);
+				PilotOutputMapper.insertStatic(pilot);
 				request.setAttribute("pilot", pilot);
 			} else {
 				throw new Exception("Must be logged in to list pilots!");

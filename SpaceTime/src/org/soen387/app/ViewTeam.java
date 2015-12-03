@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.dsrg.soenea.service.threadLocal.DbRegistry;
 import org.soen387.domain.model.player.Player;
 import org.soen387.domain.model.team.Team;
-import org.soen387.domain.model.team.mapper.TeamMapper;
+import org.soen387.domain.model.team.mapper.TeamInputMapper;
 
 /**
  * Servlet implementation class ViewTeam
@@ -41,7 +41,7 @@ public class ViewTeam extends AbstractPageController implements Servlet {
 			 */
 			Player p = getCurrentPlayer(request);
 			if (p != null) {
-				Team t = TeamMapper.find(Long.parseLong(request.getParameter("team")));
+				Team t = TeamInputMapper.find(Long.parseLong(request.getParameter("team")));
 				request.setAttribute("team", t);
 			} else {
 				throw new Exception("Must be logged in to list pilots!");

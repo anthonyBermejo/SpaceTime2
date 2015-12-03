@@ -17,7 +17,7 @@ import org.dsrg.soenea.domain.user.mapper.UserOutputMapper;
 import org.dsrg.soenea.service.tdg.UserTDG;
 import org.dsrg.soenea.service.threadLocal.DbRegistry;
 import org.soen387.domain.model.player.Player;
-import org.soen387.domain.model.player.mapper.PlayerMapper;
+import org.soen387.domain.model.player.mapper.PlayerOutputMapper;
 import org.soen387.domain.model.player.tdg.PlayerTDG;
 import org.soen387.domain.model.role.RegisteredRole;
 
@@ -66,7 +66,7 @@ public class RegisterPlayer extends AbstractPageController implements Servlet {
 			Player p = new Player(PlayerTDG.getMaxId(), 1, first, last, email, u);
 			
 			new UserOutputMapper().insert(u);
-			PlayerMapper.insertStatic(p);
+			PlayerOutputMapper.insertStatic(p);
 			
 			request.getSession(true).invalidate();
 			request.getSession(true).setAttribute("playerid", p.getId());

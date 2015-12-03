@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.soen387.domain.model.pilot.IPilot;
-import org.soen387.domain.model.pilot.mapper.PilotMapper;
+import org.soen387.domain.model.pilot.mapper.PilotInputMapper;
 import org.soen387.domain.model.player.Player;
 
 /**
@@ -45,7 +45,7 @@ public class ListPilots extends AbstractPageController implements Servlet {
 			//Do Stuff
 			Player p = getCurrentPlayer(request);
 			if(p != null) {
-				List<IPilot> pilots = PilotMapper.find(p);
+				List<IPilot> pilots = PilotInputMapper.find(p);
 				request.setAttribute("pilots", pilots);
 			} else {
 				throw new Exception("Must be logged in to list pilots!");

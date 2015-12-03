@@ -13,7 +13,8 @@ import org.dsrg.soenea.service.threadLocal.DbRegistry;
 import org.soen387.domain.model.pilot.IPilot;
 import org.soen387.domain.model.player.Player;
 import org.soen387.domain.model.team.Team;
-import org.soen387.domain.model.team.mapper.TeamMapper;
+import org.soen387.domain.model.team.mapper.TeamInputMapper;
+import org.soen387.domain.model.team.mapper.TeamOutputMapper;
 import org.soen387.domain.model.team.tdg.TeamTDG;
 
 /**
@@ -49,7 +50,7 @@ public class AddTeam extends AbstractPageController implements Servlet {
 				Team t = new Team(TeamTDG.getMaxId(), 1, teamname,
 						getCurrentPlayer(request), new LinkedList<IPilot>());
 
-				TeamMapper.insertStatic(t);
+				TeamOutputMapper.insertStatic(t);
 
 				request.setAttribute("team", t);
 

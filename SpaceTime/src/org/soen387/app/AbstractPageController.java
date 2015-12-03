@@ -21,11 +21,12 @@ import org.dsrg.soenea.service.threadLocal.ThreadLocalTracker;
 import org.dsrg.soenea.uow.MapperFactory;
 import org.dsrg.soenea.uow.UoW;
 import org.soen387.domain.model.pilot.Pilot;
-import org.soen387.domain.model.pilot.mapper.PilotMapper;
+import org.soen387.domain.model.pilot.mapper.PilotOutputMapper;
 import org.soen387.domain.model.player.Player;
-import org.soen387.domain.model.player.mapper.PlayerMapper;
+import org.soen387.domain.model.player.mapper.PlayerInputMapper;
+import org.soen387.domain.model.player.mapper.PlayerOutputMapper;
 import org.soen387.domain.model.team.Team;
-import org.soen387.domain.model.team.mapper.TeamMapper;
+import org.soen387.domain.model.team.mapper.TeamOutputMapper;
 
 /**
  * Servlet implementation class PageController
@@ -46,9 +47,9 @@ public abstract class AbstractPageController extends Servlet {
     	AbstractPageController.setupDb();
     	MapperFactory m = new MapperFactory();
     	m.addMapping(User.class, UserOutputMapper.class);
-    	m.addMapping(Player.class, PlayerMapper.class);
-    	m.addMapping(Pilot.class, PilotMapper.class);
-    	m.addMapping(Team.class, TeamMapper.class);
+    	m.addMapping(Player.class, PlayerOutputMapper.class);
+    	m.addMapping(Pilot.class, PilotOutputMapper.class);
+    	m.addMapping(Team.class, TeamOutputMapper.class);
     	UoW.initMapperFactory(m);
     };
 
@@ -93,7 +94,7 @@ public abstract class AbstractPageController extends Servlet {
 			Long pid = (Long)request.getSession(true).getAttribute("playerid");
 			System.out.println("You are playing with player: " + pid);
 			if(pid != null) {
-				request.setAttribute("CurrentPlayer", PlayerMapper.find(pid));
+				request.setAttribute("CurrentPlayer", PlayerInputMapper.find(pid));
 			}
 		} catch (DomainObjectNotFoundException | SQLException | ObjectRemovedException e) {
 			// TODO Auto-generated catch block

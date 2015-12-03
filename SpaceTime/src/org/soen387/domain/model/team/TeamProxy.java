@@ -5,7 +5,7 @@ import java.util.List;
 import org.dsrg.soenea.domain.proxy.DomainObjectProxy;
 import org.soen387.domain.model.pilot.IPilot;
 import org.soen387.domain.model.player.IPlayer;
-import org.soen387.domain.model.team.mapper.TeamMapper;
+import org.soen387.domain.model.team.mapper.TeamInputMapper;
 
 public class TeamProxy extends DomainObjectProxy<Long, Team> implements ITeam {
 	
@@ -16,7 +16,7 @@ public class TeamProxy extends DomainObjectProxy<Long, Team> implements ITeam {
 	@Override
 	public Team getFromMapper(Long id) {
 		try {
-			return TeamMapper.find(id);
+			return TeamInputMapper.find(id);
 		} catch (Exception e) {
 			// It better be here! That null won't go over well!
 			e.printStackTrace();

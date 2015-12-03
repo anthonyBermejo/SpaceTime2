@@ -72,23 +72,5 @@ public class TeamMembershipTDG {
 		PreparedStatement ps = con.prepareStatement(DELETE_BY_TEAM);
 		ps.setLong(1,team);
 		return ps.executeUpdate();
-	}
-	
-	
-	public static final String FIND_BY_PILOT = "SELECT " + COLUMNS + " FROM " + TABLE_NAME + " WHERE pilot=?;";
-	public static ResultSet findByPilot(long pilot) throws SQLException {
-    	Connection con = DbRegistry.getDbConnection();
-		PreparedStatement ps = con.prepareStatement(FIND_BY_PILOT);
-		ps.setLong(1,pilot);
-		return ps.executeQuery();
-	}
-	
-	public static final String FIND_BY_TEAM = "SELECT " + PilotTDG.COLUMNS + " FROM " + TABLE_NAME + " INNER JOIN " + PilotTDG.TABLE_NAME + " ON id=pilot WHERE team=?;";
-	public static ResultSet findByTeam(long team) throws SQLException {
-    	Connection con = DbRegistry.getDbConnection();
-		PreparedStatement ps = con.prepareStatement(FIND_BY_TEAM);
-		ps.setLong(1,team);
-		return ps.executeQuery();
-	}
-	
+	}	
 }

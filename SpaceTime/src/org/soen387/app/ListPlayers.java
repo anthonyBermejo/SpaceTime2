@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.dsrg.soenea.service.threadLocal.DbRegistry;
 import org.soen387.domain.model.player.IPlayer;
-import org.soen387.domain.model.player.mapper.PlayerMapper;
+import org.soen387.domain.model.player.mapper.PlayerInputMapper;
 
 /**
  * Servlet implementation class ListGames
@@ -36,7 +36,7 @@ public class ListPlayers extends AbstractPageController implements Servlet {
 		try {
 			
 			//Do Stuff
-			List<IPlayer> players = PlayerMapper.findAll();
+			List<IPlayer> players = PlayerInputMapper.findAll();
 			request.setAttribute("players", players);
 			
 			//Commit

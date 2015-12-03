@@ -12,7 +12,7 @@ import org.dsrg.soenea.domain.mapper.DomainObjectNotFoundException;
 import org.dsrg.soenea.domain.user.IUser;
 import org.dsrg.soenea.domain.user.mapper.UserInputMapper;
 import org.soen387.domain.model.player.IPlayer;
-import org.soen387.domain.model.player.mapper.PlayerMapper;
+import org.soen387.domain.model.player.mapper.PlayerInputMapper;
 
 /**
  * Servlet implementation class ListGames
@@ -40,7 +40,7 @@ public class LogIn extends AbstractPageController implements Servlet {
 				String username = request.getParameter("username");
 				String password = request.getParameter("password");
 				IUser u = UserInputMapper.find(username, password);
-				IPlayer p = PlayerMapper.find(u);
+				IPlayer p = PlayerInputMapper.find(u);
 				request.getSession(true).invalidate();
 				request.getSession(true).setAttribute("playerid", p.getId());
 				

@@ -7,7 +7,7 @@ import org.dsrg.soenea.domain.MapperException;
 import org.dsrg.soenea.domain.proxy.DomainObjectProxy;
 import org.dsrg.soenea.domain.user.IUser;
 import org.soen387.domain.model.pilot.IPilot;
-import org.soen387.domain.model.player.mapper.PlayerMapper;
+import org.soen387.domain.model.player.mapper.PlayerInputMapper;
 import org.soen387.domain.model.team.ITeam;
 
 public class PlayerProxy extends DomainObjectProxy<Long, Player> implements IPlayer {
@@ -21,7 +21,7 @@ public class PlayerProxy extends DomainObjectProxy<Long, Player> implements IPla
 	protected Player getFromMapper(Long id) throws MapperException,
 			DomainObjectCreationException {
 		try {
-			return PlayerMapper.find(id);
+			return PlayerInputMapper.find(id);
 		} catch (Exception e) {
 			// It better be here! That null won't go over well!
 			e.printStackTrace();
