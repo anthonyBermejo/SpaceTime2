@@ -72,15 +72,6 @@ public class NotificationTDG {
 		return ps.executeUpdate();
 	}
 	
-	public static final String DELETE_BY_PLAYER = "DELETE FROM " + TABLE_NAME + " "
-			+ "WHERE player=?";
-	public static int deleteByPlayer(long player) throws SQLException {
-		Connection con = DbRegistry.getDbConnection();
-		PreparedStatement ps = con.prepareStatement(DELETE);
-		ps.setLong(1,player);
-		return ps.executeUpdate();
-	}
-	
 	public static long getMaxId() throws SQLException {
 		return UniqueIdFactory.getMaxId(BASE, "id");
 	}
