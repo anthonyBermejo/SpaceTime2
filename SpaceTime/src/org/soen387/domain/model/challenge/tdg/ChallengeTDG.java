@@ -21,8 +21,7 @@ public class ChallengeTDG {
 			+ "challengee BIGINT, "
 			+ "status VARCHAR(32), "
 			+ "PRIMARY KEY(id), "
-			+ "INDEX(challenger), "
-			+ "INDEX(challengee), "
+			+ "INDEX(challenger, challengee) "
 			+ ");";
 
 	public static void createTable() throws SQLException {

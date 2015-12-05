@@ -17,8 +17,7 @@ public class TeamMembershipTDG {
 	public static final String CREATE_TABLE ="CREATE TABLE IF NOT EXISTS " + TABLE_NAME + " (" 
 			+ "pilot BIGINT, "
 			+ "team BIGINT, "
-			+ "INDEX(pilot), "
-			+ "INDEX(team) "
+			+ "INDEX(pilot, team) "
 			+ ");";
 
 	public static void createTable() throws SQLException {
