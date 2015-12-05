@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.dsrg.soenea.application.servlet.DispatcherServlet;
 import org.dsrg.soenea.application.servlet.Servlet;
+import org.dsrg.soenea.domain.MapperException;
 import org.dsrg.soenea.domain.ObjectRemovedException;
 import org.dsrg.soenea.domain.mapper.DomainObjectNotFoundException;
 import org.dsrg.soenea.domain.user.User;
@@ -19,6 +20,7 @@ import org.dsrg.soenea.service.registry.Registry;
 import org.dsrg.soenea.service.threadLocal.DbRegistry;
 import org.dsrg.soenea.service.threadLocal.ThreadLocalTracker;
 import org.dsrg.soenea.uow.MapperFactory;
+import org.dsrg.soenea.uow.MissingMappingException;
 import org.dsrg.soenea.uow.UoW;
 import org.soen387.domain.model.pilot.Pilot;
 import org.soen387.domain.model.pilot.mapper.PilotOutputMapper;
@@ -96,7 +98,7 @@ public abstract class AbstractPageController extends Servlet {
 			if(pid != null) {
 				request.setAttribute("CurrentPlayer", PlayerInputMapper.find(pid));
 			}
-		} catch (DomainObjectNotFoundException | SQLException | ObjectRemovedException e) {
+		} catch (SQLException | MissingMappingException | MapperException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

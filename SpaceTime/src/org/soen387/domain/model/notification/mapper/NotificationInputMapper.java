@@ -9,14 +9,16 @@ import org.dsrg.soenea.domain.MapperException;
 import org.dsrg.soenea.domain.ObjectRemovedException;
 import org.dsrg.soenea.domain.mapper.DomainObjectNotFoundException;
 import org.dsrg.soenea.domain.mapper.IdentityMap;
+import org.dsrg.soenea.uow.MissingMappingException;
 import org.dsrg.soenea.uow.UoW;
 import org.soen387.domain.model.notification.INotification;
 import org.soen387.domain.model.notification.Notification;
+import org.soen387.domain.model.notification.NotificationFactory;
 import org.soen387.domain.model.notification.tdg.NotificationFinder;
 import org.soen387.domain.model.player.PlayerProxy;
 
 public class NotificationInputMapper {
-	public static Notification find(long id) throws SQLException, DomainObjectNotFoundException, ObjectRemovedException {
+	public static Notification find(long id) throws SQLException, MissingMappingException, MapperException {
 
 		if(IdentityMap.has(id, Notification.class)) return IdentityMap.get(id, Notification.class);
 
@@ -31,7 +33,7 @@ public class NotificationInputMapper {
 	}
 
 	public static List<INotification> buildCollection(ResultSet rs)
-		    throws SQLException, ObjectRemovedException, DomainObjectNotFoundException {
+		    throws SQLException, MissingMappingException, MapperException {
 		    ArrayList<INotification> l = new ArrayList<INotification>();
 		    while(rs.next()) {
 		    	long id = rs.getLong("id");
@@ -56,10 +58,10 @@ public class NotificationInputMapper {
         }
 	}
 	
-	private static Notification buildNotification(ResultSet rs) throws SQLException  {
+	private static Notification buildNotification(ResultSet rs) throws SQLException, MissingMappingException, MapperException  {
 
 		// TODO Auto-generated method stub
-		return new Notification(rs.getLong("id"),
+		return NotificationFactory.createClean(rs.getLong("id"),
 				rs.getLong("version"),
 				new PlayerProxy(rs.getLong("recipient")),
 				rs.getBoolean("seen")

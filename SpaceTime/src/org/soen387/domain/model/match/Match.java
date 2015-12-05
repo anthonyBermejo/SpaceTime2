@@ -9,7 +9,7 @@ public class Match extends DomainObject<Long> implements IMatch{
 	private ITeam firstTeam;
 	private ITeam secondTeam;
 	
-	public Match(Long id, Long version, GameStatus status, ITeam firstTeam, ITeam secondTeam) {
+	public Match(long id, long version, GameStatus status, ITeam firstTeam, ITeam secondTeam) {
 		super(id, version);
 		this.status = status;
 		this.firstTeam = firstTeam;

@@ -9,9 +9,11 @@ import org.dsrg.soenea.domain.MapperException;
 import org.dsrg.soenea.domain.ObjectRemovedException;
 import org.dsrg.soenea.domain.mapper.DomainObjectNotFoundException;
 import org.dsrg.soenea.domain.mapper.IdentityMap;
+import org.dsrg.soenea.uow.MissingMappingException;
 import org.dsrg.soenea.uow.UoW;
 import org.soen387.domain.model.pilot.IPilot;
 import org.soen387.domain.model.pilot.Pilot;
+import org.soen387.domain.model.pilot.PilotFactory;
 import org.soen387.domain.model.pilot.tdg.PilotFinder;
 import org.soen387.domain.model.pilot.tdg.PilotTDG;
 import org.soen387.domain.model.player.IPlayer;
@@ -20,7 +22,7 @@ import org.soen387.domain.model.team.ITeam;
 import org.soen387.domain.model.team.tdg.TeamMembershipFinder;
 
 public class PilotInputMapper {
-	public static Pilot find(long id) throws SQLException, DomainObjectNotFoundException, ObjectRemovedException {
+	public static Pilot find(long id) throws SQLException, MissingMappingException, MapperException {
 
 		if(IdentityMap.has(id, Pilot.class)) return IdentityMap.get(id, Pilot.class);
 
@@ -34,18 +36,18 @@ public class PilotInputMapper {
 		throw new DomainObjectNotFoundException("Could not create a Pilot with id \""+id+"\"");
 	}
 	
-	public static List<IPilot> find(IPlayer player) throws SQLException, DomainObjectNotFoundException, ObjectRemovedException {
+	public static List<IPilot> find(IPlayer player) throws SQLException, MissingMappingException, MapperException {
 		ResultSet rs = PilotFinder.findByPlayer(player.getId());
 		return buildCollection(rs);
 	}
 	
-	public static List<IPilot> find(ITeam team) throws SQLException, DomainObjectNotFoundException, ObjectRemovedException {
+	public static List<IPilot> find(ITeam team) throws SQLException, MissingMappingException, MapperException {
 		ResultSet rs = TeamMembershipFinder.findByTeam(team.getId());
 		return buildCollection(rs);
 	}
 
 	public static List<IPilot> buildCollection(ResultSet rs)
-		    throws SQLException, ObjectRemovedException, DomainObjectNotFoundException {
+		    throws SQLException, MissingMappingException, MapperException {
 		    ArrayList<IPilot> l = new ArrayList<IPilot>();
 		    while(rs.next()) {
 		    	long id = rs.getLong("id");
@@ -70,9 +72,9 @@ public class PilotInputMapper {
         }
 	}
 	
-	private static Pilot buildPilot(ResultSet rs) throws SQLException  {
+	private static Pilot buildPilot(ResultSet rs) throws SQLException, MissingMappingException, MapperException  {
 		// TODO Auto-generated method stub
-		return new Pilot(rs.getLong("id"),
+		return PilotFactory.createClean(rs.getLong("id"),
 				rs.getInt("version"),
 				rs.getString("name"),
 				new PlayerProxy(rs.getLong("player"))

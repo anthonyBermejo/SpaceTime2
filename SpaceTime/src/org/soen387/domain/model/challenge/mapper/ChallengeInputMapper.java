@@ -9,15 +9,17 @@ import org.dsrg.soenea.domain.MapperException;
 import org.dsrg.soenea.domain.ObjectRemovedException;
 import org.dsrg.soenea.domain.mapper.DomainObjectNotFoundException;
 import org.dsrg.soenea.domain.mapper.IdentityMap;
+import org.dsrg.soenea.uow.MissingMappingException;
 import org.dsrg.soenea.uow.UoW;
 import org.soen387.domain.model.challenge.Challenge;
+import org.soen387.domain.model.challenge.ChallengeFactory;
 import org.soen387.domain.model.challenge.ChallengeStatus;
 import org.soen387.domain.model.challenge.IChallenge;
 import org.soen387.domain.model.challenge.tdg.ChallengeFinder;
 import org.soen387.domain.model.player.PlayerProxy;
 
 public class ChallengeInputMapper {
-	public static Challenge find(long id) throws SQLException, DomainObjectNotFoundException, ObjectRemovedException {
+	public static Challenge find(long id) throws SQLException, MissingMappingException, MapperException {
 
 		if(IdentityMap.has(id, Challenge.class)) return IdentityMap.get(id, Challenge.class);
 
@@ -32,7 +34,7 @@ public class ChallengeInputMapper {
 	}
 
 	public static List<IChallenge> buildCollection(ResultSet rs)
-		    throws SQLException, ObjectRemovedException, DomainObjectNotFoundException {
+		    throws SQLException, MissingMappingException, MapperException {
 		    ArrayList<IChallenge> l = new ArrayList<IChallenge>();
 		    while(rs.next()) {
 		    	long id = rs.getLong("id");
@@ -57,10 +59,10 @@ public class ChallengeInputMapper {
         }
 	}
 	
-	private static Challenge buildChallenge(ResultSet rs) throws SQLException  {
+	private static Challenge buildChallenge(ResultSet rs) throws SQLException, MissingMappingException, MapperException  {
 
 		// TODO Auto-generated method stub
-		return new Challenge(rs.getLong("id"),
+		return ChallengeFactory.createClean(rs.getLong("id"),
 				rs.getInt("version"),
 				new PlayerProxy(rs.getLong("challenger")),
 				new PlayerProxy(rs.getLong("challengee")),

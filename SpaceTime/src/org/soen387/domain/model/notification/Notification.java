@@ -7,7 +7,7 @@ public class Notification extends DomainObject<Long> implements INotification{
 	private IPlayer recipient;
 	private boolean seen;
 	
-	public Notification(Long id, Long version, IPlayer recipient, boolean seen) {
+	public Notification(long id, long version, IPlayer recipient, boolean seen) {
 		super(id, version);
 		this.recipient = recipient;
 		this.seen = seen;

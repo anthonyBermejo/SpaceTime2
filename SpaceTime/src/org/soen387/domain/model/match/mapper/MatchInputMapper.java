@@ -9,15 +9,17 @@ import org.dsrg.soenea.domain.MapperException;
 import org.dsrg.soenea.domain.ObjectRemovedException;
 import org.dsrg.soenea.domain.mapper.DomainObjectNotFoundException;
 import org.dsrg.soenea.domain.mapper.IdentityMap;
+import org.dsrg.soenea.uow.MissingMappingException;
 import org.dsrg.soenea.uow.UoW;
 import org.soen387.domain.model.match.GameStatus;
 import org.soen387.domain.model.match.IMatch;
 import org.soen387.domain.model.match.Match;
+import org.soen387.domain.model.match.MatchFactory;
 import org.soen387.domain.model.match.tdg.MatchFinder;
 import org.soen387.domain.model.team.TeamProxy;
 
 public class MatchInputMapper {
-	public static Match find(long id) throws SQLException, DomainObjectNotFoundException, ObjectRemovedException {
+	public static Match find(long id) throws SQLException, MissingMappingException, MapperException {
 
 		if(IdentityMap.has(id, Match.class)) return IdentityMap.get(id, Match.class);
 
@@ -32,7 +34,7 @@ public class MatchInputMapper {
 	}
 
 	public static List<IMatch> buildCollection(ResultSet rs)
-		    throws SQLException, ObjectRemovedException, DomainObjectNotFoundException {
+		    throws SQLException, MissingMappingException, MapperException {
 		    ArrayList<IMatch> l = new ArrayList<IMatch>();
 		    while(rs.next()) {
 		    	long id = rs.getLong("id");
@@ -57,10 +59,10 @@ public class MatchInputMapper {
         }
 	}
 	
-	private static Match buildMatch(ResultSet rs) throws SQLException  {
+	private static Match buildMatch(ResultSet rs) throws SQLException, MissingMappingException, MapperException  {
 
 		// TODO Auto-generated method stub
-		return new Match(rs.getLong("id"),
+		return MatchFactory.createClean(rs.getLong("id"),
 				rs.getLong("version"),
 				GameStatus.valueOf(rs.getString("status")),
 				new TeamProxy(rs.getLong("firstTeam")),

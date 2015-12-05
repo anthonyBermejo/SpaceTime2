@@ -11,14 +11,16 @@ import org.dsrg.soenea.domain.mapper.DomainObjectNotFoundException;
 import org.dsrg.soenea.domain.mapper.IdentityMap;
 import org.dsrg.soenea.domain.user.IUser;
 import org.dsrg.soenea.domain.user.UserProxy;
+import org.dsrg.soenea.uow.MissingMappingException;
 import org.dsrg.soenea.uow.UoW;
 import org.soen387.domain.model.player.IPlayer;
 import org.soen387.domain.model.player.Player;
+import org.soen387.domain.model.player.PlayerFactory;
 import org.soen387.domain.model.player.tdg.PlayerFinder;
 import org.soen387.domain.model.player.tdg.PlayerTDG;
 
 public class PlayerInputMapper {
-	public static Player find(long id) throws SQLException, DomainObjectNotFoundException, ObjectRemovedException {
+	public static Player find(long id) throws SQLException, MissingMappingException, MapperException {
 
 		if(IdentityMap.has(id, Player.class)) return IdentityMap.get(id, Player.class);
 
@@ -32,7 +34,7 @@ public class PlayerInputMapper {
 		throw new DomainObjectNotFoundException("Could not create a Player with id \""+id+"\"");
 	}
 	
-	public static Player find(IUser u) throws SQLException, DomainObjectNotFoundException, ObjectRemovedException {
+	public static Player find(IUser u) throws SQLException, MissingMappingException, MapperException {
 		ResultSet rs = PlayerFinder.findByUser(u.getId());
 		if(rs.next()) {
 			long id = rs.getLong("id");
@@ -48,7 +50,7 @@ public class PlayerInputMapper {
 	}
 
 	public static List<IPlayer> buildCollection(ResultSet rs)
-		    throws SQLException, ObjectRemovedException, DomainObjectNotFoundException {
+		    throws SQLException, MissingMappingException, MapperException {
 		    ArrayList<IPlayer> l = new ArrayList<IPlayer>();
 		    while(rs.next()) {
 		    	long id = rs.getLong("id");
@@ -75,9 +77,9 @@ public class PlayerInputMapper {
         }
 	}
 	
-	private static Player buildPlayer(ResultSet rs) throws SQLException  {
+	private static Player buildPlayer(ResultSet rs) throws SQLException, MissingMappingException, MapperException  {
 		// TODO Auto-generated method stub
-		return new Player(rs.getLong("id"),
+		return PlayerFactory.createClean(rs.getLong("id"),
 				rs.getInt("version"),
 				rs.getString("firstname"),
 				rs.getString("lastname"),
