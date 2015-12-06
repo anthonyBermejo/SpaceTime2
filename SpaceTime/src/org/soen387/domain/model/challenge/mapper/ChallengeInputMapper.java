@@ -30,7 +30,7 @@ public class ChallengeInputMapper {
 			UoW.getCurrent().registerClean(c);
 			return c;
 		}
-		throw new DomainObjectNotFoundException("Could not create a Pilot with id \""+id+"\"");
+		throw new DomainObjectNotFoundException("Could not create a Challenge with id \""+id+"\"");
 	}
 
 	public static List<IChallenge> buildCollection(ResultSet rs)

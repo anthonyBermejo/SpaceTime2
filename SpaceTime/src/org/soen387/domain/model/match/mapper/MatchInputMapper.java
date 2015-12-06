@@ -30,7 +30,7 @@ public class MatchInputMapper {
 			UoW.getCurrent().registerClean(c);
 			return c;
 		}
-		throw new DomainObjectNotFoundException("Could not create a Pilot with id \""+id+"\"");
+		throw new DomainObjectNotFoundException("Could not create a Match with id \""+id+"\"");
 	}
 
 	public static List<IMatch> buildCollection(ResultSet rs)

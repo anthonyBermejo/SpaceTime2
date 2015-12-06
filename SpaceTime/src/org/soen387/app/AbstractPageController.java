@@ -22,6 +22,12 @@ import org.dsrg.soenea.service.threadLocal.ThreadLocalTracker;
 import org.dsrg.soenea.uow.MapperFactory;
 import org.dsrg.soenea.uow.MissingMappingException;
 import org.dsrg.soenea.uow.UoW;
+import org.soen387.domain.model.challenge.Challenge;
+import org.soen387.domain.model.challenge.mapper.ChallengeOutputMapper;
+import org.soen387.domain.model.match.Match;
+import org.soen387.domain.model.match.mapper.MatchOutputMapper;
+import org.soen387.domain.model.notification.Notification;
+import org.soen387.domain.model.notification.mapper.NotificationOutputMapper;
 import org.soen387.domain.model.pilot.Pilot;
 import org.soen387.domain.model.pilot.mapper.PilotOutputMapper;
 import org.soen387.domain.model.player.Player;
@@ -52,6 +58,9 @@ public abstract class AbstractPageController extends Servlet {
     	m.addMapping(Player.class, PlayerOutputMapper.class);
     	m.addMapping(Pilot.class, PilotOutputMapper.class);
     	m.addMapping(Team.class, TeamOutputMapper.class);
+    	m.addMapping(Challenge.class,  ChallengeOutputMapper.class);
+    	m.addMapping(Notification.class, NotificationOutputMapper.class);
+    	m.addMapping(Match.class, MatchOutputMapper.class);
     	UoW.initMapperFactory(m);
     };
 
