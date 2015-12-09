@@ -1,0 +1,12 @@
+<permalinks>
+    <Permalink>
+        <pattern>/st/LogIn</pattern>
+        <dispatcher>org.soen387.app.dispatcher.LoginDispatcher</dispatcher>
+        <attribute name="login"/>
+    </Permalink>
+        <Permalink>
+        <pattern>/st/Player/Register</pattern>
+        <dispatcher>org.soen387.app.dispatcher.RegisterDispatcher</dispatcher>
+        <attribute name="register"/>
+    </Permalink>     
+</permalinks>

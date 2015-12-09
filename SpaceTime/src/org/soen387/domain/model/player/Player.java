@@ -4,11 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.dsrg.soenea.domain.DomainObject;
+import org.dsrg.soenea.domain.producer.IdentityBasedProducer;
 import org.dsrg.soenea.domain.user.IUser;
 import org.soen387.domain.model.pilot.IPilot;
 import org.soen387.domain.model.team.ITeam;
 
-public class Player extends DomainObject<Long> implements IPlayer {
+public class Player extends DomainObject<Long> implements IPlayer, IdentityBasedProducer {
 
 	String firstName;
 	String lastName;
