@@ -43,10 +43,13 @@ public class LoginCommand extends ValidatorCommand {
 	@Override
 	public void process() throws CommandException {
 		try {
-			String username = (String) helper.getAttribute("username");
-			String password = (String) helper.getAttribute("password");
+			String username = (String) helper.getString("username");
+			String password = (String) helper.getString("password");
 			User u = UserInputMapper.find(username, password);
 			Player p = PlayerInputMapper.find(u);
+			
+			helper.setRequestAttribute("player", p);
+			helper.setRequestAttribute("user", u);
 				
 		} catch (MissingMappingException | SQLException | MapperException e1) {
 			throw new CommandException();

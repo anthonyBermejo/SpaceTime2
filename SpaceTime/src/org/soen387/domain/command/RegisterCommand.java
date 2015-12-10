@@ -15,6 +15,7 @@ import org.dsrg.soenea.domain.helper.Helper;
 import org.dsrg.soenea.domain.role.IRole;
 import org.dsrg.soenea.domain.role.impl.GuestRole;
 import org.dsrg.soenea.domain.user.User;
+import org.dsrg.soenea.domain.user.UserFactory;
 import org.dsrg.soenea.domain.user.mapper.UserOutputMapper;
 import org.dsrg.soenea.service.tdg.UserTDG;
 import org.dsrg.soenea.uow.MissingMappingException;
@@ -41,27 +42,32 @@ public class RegisterCommand extends ValidatorCommand{
 	 */
 	//@Source(sources={PermalinkSource.class})
 	//@IdentityBasedProducer(mapper = Santas.class)
-	//@SetInRequestAttribute
+	@SetInRequestAttribute
+	public Player p;
+	public User u;
 	
 	@Override
 	public void process() throws CommandException {
 		
-		String username = (String)helper.getAttribute("username");
-		String password = (String)helper.getAttribute("password");
-		String first = (String)helper.getAttribute("firstName");
-		String last = (String)helper.getAttribute("lastName");
-		String email = (String)helper.getAttribute("email");
+		String username = (String)helper.getString("username");
+		String password = (String)helper.getString("password");
+		String first = (String)helper.getString("firstName");
+		String last = (String)helper.getString("lastName");
+		String email = (String)helper.getString("email");
+		
+		System.out.println("ATTRIBUTES: " + username + password + first + last + email);
 		
 		try {
 		List<IRole> roles = new ArrayList<IRole>();
 		roles.add(new GuestRole());
 		roles.add(new RegisteredRole());
-		User u = new User(UserTDG.getMaxId(), 1, username, roles);
-		u.setPassword(password);
+		User u = UserFactory.createNew(username, password, roles);
 		Player p = PlayerFactory.createNew(first, last, email, u);
 		
-		new UserOutputMapper().insert(u);
 		//PlayerOutputMapper.insertStatic(p);
+		
+		System.out.println("USER: " + u.getUsername());
+		System.out.println("PLAYER: " + p.getFirstName());
 		
 		helper.setRequestAttribute("player", p);
 		helper.setRequestAttribute("user", u);
