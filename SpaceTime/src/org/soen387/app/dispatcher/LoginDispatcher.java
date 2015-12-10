@@ -14,11 +14,13 @@ public class LoginDispatcher extends Dispatcher {
 	public void execute() throws ServletException, IOException {
 		try {
 			new LoginCommand(myHelper).execute();
+			forward("/WEB-INF/jsp/xml/login.jsp");
 		} catch (CommandException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			forward("/WEB-INF/jsp/xml/failure.jsp");
 		}
-		forward("/WEB-INF/jsp/xml/success.jsp");
+
 	}
 
 }

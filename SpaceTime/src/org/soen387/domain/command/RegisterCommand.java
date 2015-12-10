@@ -39,10 +39,9 @@ public class RegisterCommand extends ValidatorCommand{
 	 * ValidatorCommand assumes. SetInRequestAttribute is self-explanatory.
 	 * 
 	 */
-	@Source(sources={PermalinkSource.class})
-	@IdentityBasedProducer(mapper = Player.class)
-	@SetInRequestAttribute
-	public String register;
+	//@Source(sources={PermalinkSource.class})
+	//@IdentityBasedProducer(mapper = Santas.class)
+	//@SetInRequestAttribute
 	
 	@Override
 	public void process() throws CommandException {
@@ -59,10 +58,14 @@ public class RegisterCommand extends ValidatorCommand{
 		roles.add(new RegisteredRole());
 		User u = new User(UserTDG.getMaxId(), 1, username, roles);
 		u.setPassword(password);
-		PlayerFactory.createNew(first, last, email, u);
+		Player p = PlayerFactory.createNew(first, last, email, u);
 		
 		new UserOutputMapper().insert(u);
 		//PlayerOutputMapper.insertStatic(p);
+		
+		helper.setRequestAttribute("player", p);
+		helper.setRequestAttribute("user", u);
+		
 		} catch (MapperException | MissingMappingException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

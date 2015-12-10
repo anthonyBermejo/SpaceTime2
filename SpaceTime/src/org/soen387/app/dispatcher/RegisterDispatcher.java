@@ -15,11 +15,12 @@ public class RegisterDispatcher extends Dispatcher {
 	public void execute() throws ServletException, IOException {
 		try {
 			new RegisterCommand(myHelper).execute();
+			forward("/WEB-INF/jsp/xml/register.jsp");
 		} catch (CommandException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			forward("/WEB-INF/jsp/xml/failure.jsp");
 		}
-		forward("/WEB-INF/jsp/xml/success.jsp");
 	}
 
 }
