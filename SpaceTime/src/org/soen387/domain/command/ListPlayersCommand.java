@@ -1,6 +1,7 @@
 package org.soen387.domain.command;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import org.dsrg.soenea.domain.MapperException;
 import org.dsrg.soenea.domain.command.CommandException;
@@ -10,18 +11,13 @@ import org.dsrg.soenea.domain.command.validator.source.IdentityBasedProducer;
 import org.dsrg.soenea.domain.command.validator.source.Source;
 import org.dsrg.soenea.domain.command.validator.source.impl.PermalinkSource;
 import org.dsrg.soenea.domain.helper.Helper;
-import org.dsrg.soenea.domain.mapper.DomainObjectNotFoundException;
-import org.dsrg.soenea.domain.user.IUser;
-import org.dsrg.soenea.domain.user.User;
-import org.dsrg.soenea.domain.user.mapper.UserInputMapper;
 import org.dsrg.soenea.uow.MissingMappingException;
 import org.soen387.domain.model.player.IPlayer;
-import org.soen387.domain.model.player.Player;
 import org.soen387.domain.model.player.mapper.PlayerInputMapper;
 
-public class LoginCommand extends ValidatorCommand {
+public class ListPlayersCommand extends ValidatorCommand {
 
-	public LoginCommand(Helper helper) {
+	public ListPlayersCommand(Helper helper) {
 		super(helper);
 		// TODO Auto-generated constructor stub
 	}
@@ -37,23 +33,22 @@ public class LoginCommand extends ValidatorCommand {
 	//@Source(sources={PermalinkSource.class})
 	//@IdentityBasedProducer(mapper = Santas.class)
 	@SetInRequestAttribute
-	public Player p;
-	public User u;
+	public List<IPlayer> players;
 	
 	@Override
 	public void process() throws CommandException {
 		try {
-			String username = helper.getString("username");
-			String password = helper.getString("password");
-			User u = UserInputMapper.find(username, password);
-			Player p = PlayerInputMapper.find(u);
+			int page; 
+			int rows; 
 			
-			helper.setRequestAttribute("player", p);
-			helper.setRequestAttribute("user", u);
+			//System.out.println("PAGE: " + page);
+			//System.out.println("ROWS: " + rows);
 			
-			helper.setSessionAttribute("CurrentUser", UserInputMapper.find(username, password));
+			//List<IPlayer> players = PlayerInputMapper.find(page, rows);
+			List<IPlayer> players = PlayerInputMapper.findAll();
+			helper.setRequestAttribute("players", players);
 				
-		} catch (MissingMappingException | SQLException | MapperException e1) {
+		} catch (MissingMappingException | MapperException e1) {
 			throw new CommandException();
 		}
 	}
